@@ -1,0 +1,6 @@
+only objdump is implemnted
+
+type make to compile
+
+use ./getsyms_sect helloword
+to use the program

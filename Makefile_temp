@@ -1,0 +1,20 @@
+$(shell export LD_LIBRARARY_PATH  =$PWD:$LD_LIBRARY_PATH)
+
+PROGS = getsyms_sects
+OBJS = libobj.o
+LIBS = libobjdata.so
+
+all: $(LIBS) $(PROGS)
+
+getsyms_sects: getsyms_sects.c $(OBJS) $(LIBS)
+	gcc $< libobjdata.so -lbfd -liberty -ldl -lz -o $@
+
+libobjdata.so: libobj.o
+	gcc -shared -o $@ $^
+
+libobj.o: libobj.c
+	gcc -fPPIC -c $^
+
+clean:
+	rm -f *.o *~ *.so $(PROGS)
+
